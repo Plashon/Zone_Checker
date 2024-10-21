@@ -1,16 +1,16 @@
-import {
-  MapContainer,
-  TileLayer,
-} from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Icon } from "leaflet";
+
 const apiURL = import.meta.env.VITE_BASE_API;
 import shopIcon from "../assets/shop.png";
 import LocationMap from "../components/LocationMap";
 import Store from "../components/Store";
+import StoreCard from '../components/StoreCard'
+import { useAuthContext } from "../context/authContext";
 
 function UseMap() {
   const center = [13.838510043535697, 100.02535680572677];
@@ -90,18 +90,29 @@ function UseMap() {
   };
 
   const handleGetLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setMyLocation({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setMyLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+      );
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Geolocation is not supported by this browser.",
       });
-    });
+    }
   };
+  
 
   useEffect(() => {
     const fetchStores = async () => {
       try {
-        const response = await axios.get(apiURL + "/api/stores");
+        const response = await axios.get(apiURL + "/api/jsonstores");
         console.log(response.data);
         if (response.status === 200) {
           setStores(response.data);
@@ -123,40 +134,47 @@ function UseMap() {
       : storeIcon; // Regular size
   };
   return (
-    <div className="p-3">
-      <h1 className="text-center text-3xl font-bold mb-3">
-        Store Delivery Zone Checker
-      </h1>
-      <div className="flex justify-center items-center mx-auto mb-3 space-x-2">
-        <button onClick={handleGetLocation} className="btn btn-ghost">
-          Get location
-        </button>
-        <button className="btn btn-outline" onClick={handleLocationCheck}>
-          Check delivery zone
-        </button>
+    <>
+      <div className="p-3">
+        <h1 className="text-center text-3xl font-bold mb-3">
+          Store Delivery Zone Checker
+        </h1>
+        <div className="flex justify-center items-center mx-auto mb-3 space-x-2">
+          <button onClick={handleGetLocation} className="btn btn-ghost">
+            Get location
+          </button>
+          <button className="btn btn-outline" onClick={handleLocationCheck}>
+            Check delivery zone
+          </button>
+          <StoreCard stores={stores}/>
+        </div>
+        <div className="flex justify-center items-center mx-auto">
+        
+          {" "}
+          <MapContainer
+            center={center}
+            zoom={13}
+            scrollWheelZoom={true}
+            style={{ height: "400px", width: "100%" }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Store
+              stores={stores}
+              handleStoreClick={handleStoreClick}
+              getStoreIcon={getStoreIcon}
+            />
+            {/* Use Location here */}
+            <LocationMap
+              setMyLocation={setMyLocation}
+              myLocation={myLocation}
+            />
+          </MapContainer>
+        </div>
       </div>
-      <div className="flex justify-center items-center mx-auto">
-        {" "}
-        <MapContainer
-          center={center}
-          zoom={13}
-          scrollWheelZoom={true}
-          style={{ height: "85vh", width: "90vw" }}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Store
-            stores={stores}
-            handleStoreClick={handleStoreClick}
-            getStoreIcon={getStoreIcon}
-          />
-          {/* Use Location here */}
-          <LocationMap setMyLocation={setMyLocation} myLocation={myLocation} />
-        </MapContainer>
-      </div>
-    </div>
+    </>
   );
 }
 

@@ -1,10 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import UseMap from './pages/UseMap'
-import './index.css'
+import { RouterProvider } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import React, { Suspense } from "react";
+import router from "./router/router.jsx";
+import { AuthProvider } from "./context/authContext.jsx";
+import { StoreProvider } from "./context/StoreContext.jsx";
+import "./index.css";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <UseMap />
-  </StrictMode>
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <AuthProvider>
+      <StoreProvider>
+        <RouterProvider router={router} />{" "}
+      </StoreProvider>
+    </AuthProvider>
+  </React.StrictMode>
 );

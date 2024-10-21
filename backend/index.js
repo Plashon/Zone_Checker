@@ -8,11 +8,11 @@ const authRouter = require("./routers/auth.router")
 const storeRouter = require("./routers/store.router")
 
 
-const FRONTEND_CONNECTION = process.env.FRONTEND_CONNECTION;
+const FRONTEND_CONNECTION = process.env.FRONTEND_CONNECTION ;
 const PORT = process.env.PORT;
 
 const corsOptions = {
-  origin:FRONTEND_CONNECTION||"https://zone-checker.vercel.app",
+  origin:FRONTEND_CONNECTION,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
   optionSuccessStatus:200,

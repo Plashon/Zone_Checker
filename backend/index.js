@@ -12,7 +12,7 @@ const FRONTEND_CONNECTION = process.env.FRONTEND_CONNECTION;
 const PORT = process.env.PORT;
 
 const corsOptions = {
-  origin: FRONTEND_CONNECTION,
+  origin: FRONTEND_CONNECTION || "https://zone-checker.vercel.app/"
 };
 const stores = require("./stores");
 

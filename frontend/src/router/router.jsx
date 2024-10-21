@@ -17,11 +17,11 @@ const IsUser = lazy(() => import("./IsUser"));
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/home",
     element: <DefaultLayout />,
     children: [
       {
-        path: "home",
+        path: "",
         element: <Home />,
       },
       { path: "aboutus", element: <AboutUs /> },

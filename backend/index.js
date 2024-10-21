@@ -12,7 +12,10 @@ const FRONTEND_CONNECTION = process.env.FRONTEND_CONNECTION;
 const PORT = process.env.PORT;
 
 const corsOptions = {
-  origin: FRONTEND_CONNECTION || "https://zone-checker.vercel.app/"
+  origin:"https://zone-checker.vercel.app/",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+  optionSuccessStatus:200,
 };
 const stores = require("./stores");
 
@@ -32,6 +35,7 @@ const initRole = () => {
 
 
 app.use(cors(corsOptions));
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

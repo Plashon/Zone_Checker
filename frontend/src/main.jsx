@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <StoreProvider>
-        <RouterProvider router={router} />{" "}
+        <RouterProvider router={router} />{""}
       </StoreProvider>
     </AuthProvider>
   </React.StrictMode>

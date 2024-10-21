@@ -1,6 +1,8 @@
 import React from "react";
+import { useStoreContext } from './../context/StoreContext';
 
-const StoreCard = ({ stores }) => {  
+const StoreCard = () => {  
+  const {stores} = useStoreContext()
   return (
     stores &&
     stores.map((store) => {

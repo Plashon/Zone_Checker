@@ -38,7 +38,7 @@ const Login = () => {
           userName: "",
           password: "",
         });
-        navigate("/");
+        navigate("/store");
       }
     } catch (error) {
       Swal.fire({

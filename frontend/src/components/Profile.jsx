@@ -50,7 +50,7 @@ const Profile = ({ logout, user }) => {
               </a>
             </li>
             <li>
-              <a onClick={handleLogout}>Logout</a>
+              <a onClick={handleLogout} href="/home">Logout</a>
             </li>
           </ul>
         </div>

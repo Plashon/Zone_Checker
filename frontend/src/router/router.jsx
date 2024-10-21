@@ -13,13 +13,15 @@ const UpdateStore = lazy(() => import("../pages/UpdateStore"));
 const AboutUs = lazy(() => import("../pages/AboutUs"));
 const ContactPage = lazy(() => import("../pages/ContactPage"));
 const AdminOnly = lazy(() => import("./AdminOnly"));
+const IsUser = lazy(() => import("./IsUser"));
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <DefaultLayout />,
     children: [
       {
-        path: "",
+        path: "home",
         element: <Home />,
       },
       { path: "aboutus", element: <AboutUs /> },
@@ -40,11 +42,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "store",
-        element: <StorePage />,
+        element: (
+          <IsUser>
+            <StorePage />
+          </IsUser>
+        ),
       },
       {
         path: "create",
-        element: <CreateStore />,
+        element: (
+          //<IsUser>
+            <CreateStore />
+          //</IsUser>
+        ),
       },
       {
         path: "update/:id",
@@ -55,9 +65,9 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:"testmap",
-        element:<UseMap/>
-      }
+        path: "testmap",
+        element: <UseMap />,
+      },
     ],
   },
 ]);

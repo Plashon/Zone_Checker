@@ -146,7 +146,7 @@ function UseMap() {
           <button className="btn btn-outline" onClick={handleLocationCheck}>
             Check delivery zone
           </button>
-          <StoreCard stores={stores}/>
+          
         </div>
         <div className="flex justify-center items-center mx-auto">
         
@@ -177,5 +177,8 @@ function UseMap() {
     </>
   );
 }
+
+
+
 
 export default UseMap;

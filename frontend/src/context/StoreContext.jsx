@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import StoreService from "../services/store.service";
 import Swal from "sweetalert2";
-
+import { useAuthContext } from "./authContext";
 export const StoreContext = createContext();
 export const StoreProvider = ({ children }) => {
-  const [store, setStore] = useState([]);
+  const {login} = useAuthContext()
+  const [stores, setStores] = useState([]);
   const [filterStore, setFilterStore] = useState([]);
 
   //show store
@@ -23,7 +24,7 @@ export const StoreProvider = ({ children }) => {
     try {
       const response = await StoreService.getAllStore();
       if (response.status === 200) {
-        setStore(response.data);
+        setStores(response.data);
         setFilterStore(response.data);
       }
     } catch (error) {
@@ -33,17 +34,17 @@ export const StoreProvider = ({ children }) => {
   useEffect(() => {
     getStore();
   }, []);
-  
+
   useEffect(() => {
-    setFilterStore(store);
-  }, [store]);
+    setFilterStore(stores);
+  }, [stores]);
 
   //create new store
   const createStore = async (newStore) => {
     try {
       const response = await StoreService.createStore(newStore);
       if (response.status === 200) {
-        setStore((prev) => [...prev, response.data]);
+        setStores((prev) => [...prev, response.data]);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -68,7 +69,7 @@ export const StoreProvider = ({ children }) => {
     try {
       const response = await StoreService.updateStoreById(id, updateStore);
       if (response.status === 200) {
-        setStore((prev) =>
+        setStores((prev) =>
           prev.map((store) => (store.id === id ? updateStore : store))
         );
         Swal.fire({
@@ -129,7 +130,7 @@ export const StoreProvider = ({ children }) => {
   return (
     <StoreContext.Provider
       value={{
-        store,
+        stores,
         filterStore,
         setFilterStore,
         getStore,

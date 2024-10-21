@@ -8,12 +8,15 @@ import shopIcon from "../assets/shop.png";
 import Store from "../components/Store";
 
 import StoreService from "../services/store.service";
+
 const StorePage = () => {
   const center = [13.838510043535697, 100.02535680572677]; // ตำแหน่งกลางของแผนที่
   const [stores, setStores] = useState([]);
   const [selectedStoreId, setSelectedStoreId] = useState();
   const { id } = useParams();
     
+
+
   const storeIcon = new Icon({
     iconUrl: shopIcon,
     iconSize: [38, 45],
@@ -42,7 +45,7 @@ const StorePage = () => {
           center={center}
           zoom={14}
           scrollWheelZoom={true}
-          style={{ height: "79vh", width: "100%" }} // ใช้ความสูง 50vh
+          style={{ height: "100vh", width: "100%" }} // ใช้ความสูง 50vh
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

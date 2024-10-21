@@ -12,7 +12,7 @@ const FRONTEND_CONNECTION = process.env.FRONTEND_CONNECTION;
 const PORT = process.env.PORT;
 
 const corsOptions = {
-  origin:"https://zone-checker.vercel.app",
+  origin:FRONTEND_CONNECTION||"https://zone-checker.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
   optionSuccessStatus:200,

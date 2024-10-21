@@ -1,4 +1,4 @@
-import { useAuthContext } from "../contexts/AuthContext";
+import { useAuthContext } from "../context/authContext";
 import { Navigate } from "react-router-dom";
 
 const AdminOnly = ({ children }) => {

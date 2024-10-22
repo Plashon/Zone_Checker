@@ -11,11 +11,15 @@ const storeRouter = require("./routers/store.router")
 const FRONTEND_CONNECTION = process.env.FRONTEND_CONNECTION ;
 const PORT = process.env.PORT;
 
+// const corsOptions = {
+//   origin:FRONTEND_CONNECTION,
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true,
+//   optionSuccessStatus:200,
+// };
+
 const corsOptions = {
-  origin:FRONTEND_CONNECTION,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-  optionSuccessStatus:200,
+  origin:"http://localhost:5173"
 };
 const stores = require("./stores");
 

@@ -8,6 +8,7 @@ const {authJwt} = require("../middlewares")
 // get store
 router.get("/",storeController.getAllStore)
 router.get("/:id",storeController.getByStoreId)
+router.get("/user/:userId",[authJwt.verifyToken], storeController.getStoreByUserId);
 //create 
 router.post("/",[authJwt.verifyToken],storeController.createStore)
 //update store by id

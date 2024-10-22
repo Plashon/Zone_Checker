@@ -6,7 +6,7 @@ const MapLayout = () => {
   return (
     <div>
       <Navbar />
-      <div className="h-auto">
+      <div className="h-auto mt-20">
         <Outlet />
       </div>
     </div>

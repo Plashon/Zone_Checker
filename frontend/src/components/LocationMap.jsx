@@ -1,6 +1,4 @@
 import {
-  MapContainer,
-  TileLayer,
   Popup,
   Marker,
   useMapEvent,

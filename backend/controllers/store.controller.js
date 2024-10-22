@@ -102,3 +102,17 @@ exports.deleteStoreById = async (req, res) => {
     }
   });
 };
+
+
+exports.getStoreByUserId = async (req, res) => {
+  const userId = req.userId; // Extracted from the token
+  try {
+   const data = await Store.findAll({where:{userId:userId}});
+   res.send(data)
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      error: error.message || "Something error occurred while getting stores by user ID",
+    });
+  }
+};

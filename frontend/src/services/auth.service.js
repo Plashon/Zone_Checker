@@ -1,6 +1,12 @@
 import api from "./api";
 const VITE_AUTH_API = import.meta.env.VITE_AUTH_API;
 
+const updateLocalStorageUser = (userData) => {
+  if (userData.accessToken) {
+    localStorage.setItem("accessToken", JSON.stringify(userData.accessToken));
+    localStorage.setItem("user", JSON.stringify(userData));
+  }
+};
 //view user by id
 const getUserById = async (id) => {
   return await api.get(`${VITE_AUTH_API}/${id}`);
@@ -43,5 +49,6 @@ const AuthService = {
   register,
   login,
   logout,
+  updateLocalStorageUser,
 };
 export default AuthService;

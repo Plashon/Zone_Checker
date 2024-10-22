@@ -6,10 +6,9 @@ const UserLayout = () => {
   return (
     <div>
        <Navbar />
-      <div className=" h-auto mb-10">
+      <div className=" h-auto mt-20 mb-10">
         <Outlet />
       </div>
-      <Footer />
     </div>
   );
 };

@@ -14,8 +14,8 @@ const Store = ({ stores, handleStoreClick, getStoreIcon }) => {
         >
           <Popup>
             <b>{store.name}</b>
-            <p>{store.address}</p>
-            <p>{store.id}</p>
+            <p><strong>Address : </strong>{store.address}</p>
+            <p><strong>Service Radius: </strong>{store.radius} m.</p>
           </Popup>
         </Marker>
       );

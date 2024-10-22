@@ -1,5 +1,4 @@
 import Profile from "./Profile";
-import SearchBar from "./SearchBar";
 import { useAuthContext } from "../context/authContext";
 import ThemeChanger from './ThemeChanger';
 
@@ -8,8 +7,22 @@ const Navbar = () => {
 
   const navbarMenu = {
     ROLES_USER: [{ name: "Create Store", link: "/create" }],
-    ROLES_ADMIN: [{ name: "Create Store", link: "/create" },{name:"Update Store", link : "/update"}],
+    ROLES_ADMIN: [
+      { name: "Create Store", link: "/create" },
+      { name: "Your Store", link: "/userStore" }
+    ],
   };
+
+  // Function to get the appropriate menu based on roles
+  const getMenu = () => {
+    if (user.roles.includes("ROLES_ADMIN")) {
+      return navbarMenu["ROLES_ADMIN"];
+    } else if (user.roles.includes("ROLES_USER")) {
+      return navbarMenu["ROLES_USER"];
+    }
+    return [];
+  };
+
   return (
     <div className="navbar bg-base-100 shadow-lg top-0 w-full fixed z-50">
       <div className="navbar-start">
@@ -18,13 +31,12 @@ const Navbar = () => {
         </a>
       </div>
       <div className="navbar-end gap-2">
-      {user &&
-          navbarMenu[user.roles[0]].map((menuItem) => (
-            <a href={menuItem.link} className="btn btn-ghost">
+        {user &&
+          getMenu().map((menuItem) => (
+            <a key={menuItem.name} href={menuItem.link} className="btn btn-ghost">
               {menuItem.name}
             </a>
           ))}
-        <SearchBar />
         {user ? (
           <Profile user={user} logout={logout} />
         ) : (

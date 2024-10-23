@@ -15,8 +15,8 @@ const ContactPage = () => {
               <br />
               Phone : 000-000-0000
             </p>
-            <a href="/store" className="btn btn-secondary">
-              Return to the store page
+            <a href="/" className="btn btn-secondary">
+            Return to the home page
             </a>
           </div>
         </div>

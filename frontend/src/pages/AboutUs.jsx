@@ -12,8 +12,8 @@ const AboutUs = () => {
               student of Nakhon Pathom Rajabhat University.
               <br />
             </p>
-            <a href="/store" className="btn btn-secondary">
-              Return to the store page
+            <a href="/" className="btn btn-secondary">
+              Return to the home page
             </a>
           </div>
         </div>

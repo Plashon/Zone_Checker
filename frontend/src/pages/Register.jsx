@@ -4,6 +4,9 @@ import "leaflet/dist/leaflet.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import { Icon } from "leaflet";
+import marker from "../assets/location.png"
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -14,6 +17,10 @@ const Register = () => {
     lat: "",
     lng: "",
   });
+  const markerIcon = new Icon({
+    iconUrl: marker,
+    iconSize: [35, 45], // size of the icon
+  });
   const [location, setLocation] = useState(null);
   const [showMap, setShowMap] = useState(false);
   const LocationMarker = () => {
@@ -22,7 +29,7 @@ const Register = () => {
         setLocation(e.latlng); // Set the location when the map is clicked
       },
     });
-    return location === null ? null : <Marker position={location}></Marker>;
+    return location === null ? null : <Marker icon={markerIcon}  position={location}></Marker>;
   };
 
   const handleChange = (e) => {

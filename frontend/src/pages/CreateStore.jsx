@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useStoreContext } from '../context/StoreContext';
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
+import { Icon } from "leaflet";
+import marker from "../assets/location.png"
 
 const CreateStore = () => {
   const navigate = useNavigate();
@@ -29,6 +31,10 @@ const CreateStore = () => {
     navigate("/store");
   };
 
+  const markerIcon = new Icon({
+    iconUrl: marker,
+    iconSize: [35, 45], // size of the icon
+  });
   // คอมโพเนนต์สำหรับจับเหตุการณ์คลิกบนแผนที่
   const LocationMarker = () => {
     useMapEvents({
@@ -36,7 +42,7 @@ const CreateStore = () => {
         setLocation(e.latlng); // อัปเดตตำแหน่งชั่วคราวเมื่อคลิกที่แผนที่
       },
     });
-    return location === null ? null : <Marker position={location}></Marker>;
+    return location === null ? null : <Marker icon={markerIcon}  position={location}></Marker>;
   };
 
   // ฟังก์ชันยืนยันพิกัดจากแผนที่

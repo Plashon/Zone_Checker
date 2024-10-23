@@ -9,7 +9,8 @@ const DefaultLayout = () => {
       <div>
         <Outlet />
       </div>
-      <Footer/>
+     <Footer/>
+      
     </div>
   );
 };

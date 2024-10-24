@@ -93,6 +93,7 @@ const CreateStore = () => {
           <input
             type="number"
             name="radius"
+            min={1}
             value={formData.radius}
             onChange={handleChange}
             className="input input-bordered"

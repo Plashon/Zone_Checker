@@ -157,6 +157,7 @@ const UpdateStore = () => {
           <input
             type="number"
             id="radius"
+            min={0}
             name="radius"
             value={storeData.radius}
             onChange={handleInputChange}

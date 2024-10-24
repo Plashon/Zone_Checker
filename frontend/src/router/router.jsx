@@ -15,8 +15,8 @@ const ContactPage = lazy(() => import("../pages/ContactPage"));
 const AdminOnly = lazy(() => import("./AdminOnly"));
 const IsUser = lazy(() => import("./IsUser"));
 const User = lazy(() => import("./User"));
-const AdminStore = lazy(()=>import("./AdminStore"))
-const UserStore = lazy(()=> import("../pages/UserStore"))
+const AdminStore = lazy(() => import("./AdminStore"));
+const UserStore = lazy(() => import("../pages/UserStore"));
 
 const router = createBrowserRouter([
   {
@@ -74,13 +74,20 @@ const router = createBrowserRouter([
         element: (
           <AdminOnly>
             <AdminStore>
-            <UpdateStore />
+              <UpdateStore />
             </AdminStore>
           </AdminOnly>
         ),
       },
-      {path:"userStore",
-        element:<AdminOnly><AdminStore><UserStore/></AdminStore></AdminOnly>
+      {
+        path: "userStore",
+        element: (
+          <AdminOnly>
+            {/* <AdminStore> */}
+              <UserStore />
+            {/* </AdminStore> */}
+          </AdminOnly>
+        ),
       },
       {
         path: "testmap",
